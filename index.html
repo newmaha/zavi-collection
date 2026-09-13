@@ -287,7 +287,201 @@
             .product-grid { grid-template-columns: repeat(2, 1fr); gap: 15px; }
             .product-card img { height: 140px; }
             .order-btn { font-size: 13px; padding: 8px; }
+        } 
+        /* Category links ka blue color aur underline remove */
+        .cat-item {
+             text-decoration: none;
+             color: inherit;
         }
+
+        .cat-item:visited,
+        .cat-item:hover,
+        .cat-item:active {
+             text-decoration: none;
+             color: inherit;
+        }
+
+        .cat-item span {
+             text-decoration: none;
+            }
+
+            /* =========================
+   ZAVI COLLECTION HEADER
+   ========================= */
+
+.main-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 14px 5%;
+    position: relative;
+    z-index: 1000;
+}
+
+.brand-area {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+}
+
+.brand-dp {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.brand-name {
+    font-size: 20px;
+    font-weight: 800;
+    white-space: nowrap;
+}
+
+.desktop-nav {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.desktop-nav a {
+    text-decoration: none;
+    color: inherit;
+    font-weight: 600;
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.header-icon-btn {
+    position: relative;
+    border: none;
+    background: transparent;
+    color: inherit;
+    cursor: pointer;
+    font-size: 23px;
+    padding: 8px;
+    border-radius: 10px;
+}
+
+.header-icon-btn:hover {
+    background: rgba(128, 128, 128, 0.12);
+}
+
+.cart-count {
+    position: absolute;
+    top: -3px;
+    right: -3px;
+
+    min-width: 19px;
+    height: 19px;
+    padding: 2px 5px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #e63946;
+    color: white;
+    border-radius: 5px;
+
+    font-size: 11px;
+    font-weight: 800;
+    line-height: 1;
+}
+
+/* Search box initially hidden */
+.search-panel {
+    display: none;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 5%;
+}
+
+.search-panel.active {
+    display: flex;
+}
+
+.search-panel input {
+    flex: 1;
+    min-width: 0;
+    padding: 12px 15px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    font-size: 15px;
+}
+
+.search-panel button {
+    border: none;
+    background: transparent;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+/* Mobile responsive design */
+@media (max-width: 768px) {
+
+    .main-header {
+        gap: 8px;
+        padding: 12px 4%;
+    }
+    .brand-name {
+        font-size: 15px;
+    }
+    .brand-dp {
+        width: 34px;
+        height: 34px;
+    }
+    .desktop-nav {
+        display: none;
+    }
+    .header-actions {
+        gap: 3px;
+    }
+    .header-icon-btn {
+        font-size: 20px;
+        padding: 6px;
+    }
+    .cart-count {
+        min-width: 17px;
+        height: 17px;
+        font-size: 10px;
+    }
+}
+/* ================= ADD TO CART BUTTON ================= */
+
+.add-cart-btn {
+    background: var(--text-heading);
+    color: var(--bg-color);
+    border: none;
+    padding: 10px 15px;
+    width: 100%;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin-top: 8px;
+    transition: 0.3s ease;
+}
+
+.add-cart-btn:hover {
+    opacity: 0.85;
+    transform: translateY(-2px);
+}
+
+.add-cart-btn:active {
+    transform: scale(0.97);
+}
+
     </style>
 </head>
 <body>
@@ -299,18 +493,51 @@
     </button>
 
     <!-- Header -->
-    <header>
-        <div class="header-left">
-            <!-- Aapki DP Image -->
-            <img src="dp01.png" alt="Profile DP" onerror="this.src='https://via.placeholder.com/50?text=DP'">
-        </div>
-        <div class="header-center">
-            <h1>Zavi Collection</h1>
-        </div>
-        <div class="header-right">
-            <i class="fas fa-bars menu-btn" onclick="toggleMenu()"></i>
-        </div>
-    </header>
+    <header class="main-header">
+
+    <div class="brand-area">
+        <img src="dp01.png" alt="Zavi Collection Logo" class="brand-dp">
+
+        <span class="brand-name">ZAVI COLLECTION</span>
+    </div>
+
+    <nav class="desktop-nav">
+        <a href="index.html">Home</a>
+        <a href="#categories">Categories</a>
+    </nav>
+
+    <div class="header-actions">
+
+        <button class="header-icon-btn" id="searchToggle" aria-label="Search">
+            🔍
+        </button>
+
+        <button class="header-icon-btn cart-button" id="cartButton" aria-label="Cart">
+            🛒
+            <span id="cartCount" class="cart-count">0</span>
+        </button>
+
+        <button class="header-icon-btn" id="menuToggle" aria-label="Open menu">
+            ☰
+        </button>
+
+    </div>
+
+</header> 
+<div class="search-panel" id="searchPanel">
+
+    <input
+        type="search"
+        id="searchInput"
+        placeholder="Search products..."
+        aria-label="Search products"
+    >
+
+    <button id="searchClose" type="button">
+        ✕
+    </button>
+
+</div>
 
     <!-- Sidebar Menu -->
     <div class="side-menu" id="sideMenu">
@@ -318,7 +545,7 @@
         <ul>
             <li>Women</li>
             <li>Girls</li>
-            <li>Jewellry</li>
+            <li>Jewellery</li>
             <li>Contact Us</li>
         </ul>
     </div>
@@ -333,22 +560,31 @@
 
     <!-- Categories (Circles) -->
     <section class="categories">
-        <div class="cat-item">
-            <div class="cat-circle"><i class="fas fa-tshirt"></i></div>
-            <span>Women</span>
-        </div>
-        <div class="cat-item">
-            <div class="cat-circle"><i class="fas fa-gem"></i></div>
-            <span>Jewellry</span>
-        </div>
-        <div class="cat-item">
-            <div class="cat-circle"><i class="fas fa-gift"></i></div>
-            <span>Gifts</span>
-        </div>
-        <div class="cat-item">
-            <div class="cat-circle"><i class="fas fa-border-all"></i></div>
-            <span>All</span>
-        </div>
+       <a href="women.html" class="cat-item">
+     <div class="cat-circle">
+        <i class="fas fa-tshirt"></i>
+    </div>
+    <span>Women</span>
+</a> 
+<a href="jewellery.html" class="cat-item">
+    <div class="cat-circle">
+        <i class="fas fa-tshirt"></i>
+    </div>
+    <span>Jewellery</span>
+</a>
+        <a href="gifts.html" class="cat-item">
+    <div class="cat-circle">
+        <i class="fas fa-tshirt"></i>
+    </div>
+    <span>Gifts</span>
+</a>
+        <a href="all.html" class="cat-item">
+    <div class="cat-circle">
+        <i class="fas fa-tshirt"></i>
+    </div>
+    <span>All</span>
+</a>
+        
     </section>
 
     <!-- Product Grid -->
@@ -360,15 +596,19 @@
 
 
             
-            <!-- Product 1 -->
+           <!-- Product 1 -->
             <div class="product-card">
                 <img src="clothes/photo01.png" alt="Designer Peach Suit">
-                <div class="product-title">Designer Peach Suit</div>
-                <div class="product-price">₹899</div>
-                <button class="order-btn" onclick="orderOnWhatsApp('Designer Peach Suit', '1200')">
+                <div class="product-title">Rose Gold Necklace</div>
+                <div class="product-price">₹450</div>
+                <button class="order-btn" onclick="orderOnWhatsApp('Rose Gold Necklace', '899')">
                     <i class="fab fa-whatsapp"></i> Order Now
                 </button>
+                <button class="add-cart-btn" onclick="addToCart('Rose Gold Necklace', '899', 'clothes/photo01.png')">
+                    <i class="fas fa-cart-plus"></i> Add to Cart
+                </button>
             </div>
+
 
 
 
@@ -382,6 +622,9 @@
                 <div class="product-price">₹450</div>
                 <button class="order-btn" onclick="orderOnWhatsApp('Rose Gold Necklace', '450')">
                     <i class="fab fa-whatsapp"></i> Order Now
+                </button>
+                <button class="add-cart-btn" onclick="addToCart('Rose Gold Necklace', '450', 'clothes/photo02.png')">
+                    <i class="fas fa-cart-plus"></i> Add to Cart
                 </button>
             </div>
 
@@ -398,6 +641,9 @@
                 <button class="order-btn" onclick="orderOnWhatsApp('Girls Casual Top', '350')">
                     <i class="fab fa-whatsapp"></i> Order Now
                 </button>
+                <button class="add-cart-btn" onclick="addToCart('Girls Casual Top', '350', 'clothes/photo03.png')">
+                    <i class="fas fa-cart-plus"></i> Add to Cart
+                </button>
             </div>
 
 
@@ -413,6 +659,9 @@
                 <button class="order-btn" onclick="orderOnWhatsApp('Premium Gift Hamper', '900')">
                     <i class="fab fa-whatsapp"></i> Order Now
                 </button>
+                <button class="add-cart-btn" onclick="addToCart('Premium Gift Hamper', '900', 'clothes/photo04.png')">
+                    <i class="fas fa-cart-plus"></i> Add to Cart
+                </button>
             </div>
 
 
@@ -427,6 +676,9 @@
                 <button class="order-btn" onclick="orderOnWhatsApp('Premium Gift Hamper', '900')">
                     <i class="fab fa-whatsapp"></i> Order Now
                 </button>
+                <button class="add-cart-btn" onclick="addToCart('Premium Gift Hamper', '900', 'clothes/photo05.png')">
+                    <i class="fas fa-cart-plus"></i> Add to Cart
+                </button>
             </div>
 
 
@@ -440,6 +692,9 @@
                 <div class="product-price">₹900</div>
                 <button class="order-btn" onclick="orderOnWhatsApp('Premium Gift Hamper', '900')">
                     <i class="fab fa-whatsapp"></i> Order Now
+                </button>
+                <button class="add-cart-btn" onclick="addToCart('Premium Gift Hamper', '900', 'clothes/photo06.png')">
+                    <i class="fas fa-cart-plus"></i> Add to Cart
                 </button>
             </div>
 
@@ -456,6 +711,9 @@
                 <button class="order-btn" onclick="orderOnWhatsApp('Premium Gift Hamper', '900')">
                     <i class="fab fa-whatsapp"></i> Order Now
                 </button>
+                <button class="add-cart-btn" onclick="addToCart('Premium Gift Hamper', '900', 'clothes/photo07.png')">
+                    <i class="fas fa-cart-plus"></i> Add to Cart
+                </button>
             </div>
 
 
@@ -470,6 +728,9 @@
                 <div class="product-price">₹900</div>
                 <button class="order-btn" onclick="orderOnWhatsApp('Premium Gift Hamper', '900')">
                     <i class="fab fa-whatsapp"></i> Order Now
+                </button>
+                <button class="add-cart-btn" onclick="addToCart('Premium Gift Hamper', '900', 'clothes/photo08.png')">
+                    <i class="fas fa-cart-plus"></i> Add to Cart
                 </button>
             </div>
 
@@ -515,28 +776,53 @@
             menu.classList.toggle('active');
         }
 
-        // Video Slider Logic
-        let currentSlide = 0;
-        const totalSlides = 3;
+// ================= ADD TO CART SYSTEM =================
 
-        function slide(direction) {
-            currentSlide += direction;
-            
-            if (currentSlide < 0) currentSlide = totalSlides - 1;
-            if (currentSlide >= totalSlides) currentSlide = 0;
+let cart = JSON.parse(localStorage.getItem("zaviCart")) || [];
 
-            const slider = document.getElementById('videoSlider');
-            slider.style.transform = `translateX(-${currentSlide * (100 / totalSlides)}%)`;
+function addToCart(productName, price, image) {
 
-            const videos = slider.getElementsByTagName('video');
-            for(let i=0; i<videos.length; i++) {
-                if(i === currentSlide) {
-                    videos[i].play();
-                } else {
-                    videos[i].pause();
-                }
-            }
-        }
+    const existingProduct = cart.find(
+        item => item.name === productName
+    );
+
+    if (existingProduct) {
+        existingProduct.quantity += 1;
+    } else {
+        cart.push({
+            name: productName,
+            price: Number(price),
+            image: image,
+            quantity: 1
+        });
+    }
+
+    localStorage.setItem("zaviCart", JSON.stringify(cart));
+
+    updateCartCount();
+
+    alert(productName + " cart mein add ho gaya 🛒");
+}
+
+
+// Cart count update karna
+function updateCartCount() {
+
+    const cartCount = document.getElementById("cartCount");
+
+    if (cartCount) {
+        const totalItems = cart.reduce(
+            (total, item) => total + item.quantity,
+            0
+        );
+
+        cartCount.textContent = totalItems;
+    }
+}
+
+
+// Page load hone par cart count dikhana
+updateCartCount();
 
         // Dynamic WhatsApp Order Generator
         function orderOnWhatsApp(productName, price) {
@@ -548,6 +834,27 @@
             
             window.open(whatsappURL, '_blank');
         }
+
+        const searchToggle = document.getElementById("searchToggle");
+const searchPanel = document.getElementById("searchPanel");
+const searchClose = document.getElementById("searchClose");
+const searchInput = document.getElementById("searchInput");
+
+if (searchToggle && searchPanel) {
+    searchToggle.addEventListener("click", () => {
+        searchPanel.classList.toggle("active");
+
+        if (searchPanel.classList.contains("active") && searchInput) {
+            searchInput.focus();
+        }
+    });
+}
+
+if (searchClose && searchPanel) {
+    searchClose.addEventListener("click", () => {
+        searchPanel.classList.remove("active");
+    });
+}
     </script>
 </body>
 </html>
