@@ -9,21 +9,21 @@
     <style>
         /* ================= COLOR PALETTE & GLOBAL STYLES ================= */
         :root {
-            /* Light Mode (Jesa image_2.png me hai) */
+            /* Light Mode */
             --bg-color: #f4efea; 
-            --text-heading: #313329; /* Dark text for headings */
-            --text-normal: #555555; /* Normal text */
-            --card-bg: #ffffff; /* White background for cards and circles */
-            --btn-bg: #25D366; /* WhatsApp Green */
+            --text-heading: #313329; 
+            --text-normal: #555555; 
+            --card-bg: #ffffff; 
+            --btn-bg: #25D366; 
             --shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
         }
 
         .dark-theme {
-            /* Dark Mode (Jesa image_3.png me hai) */
+            /* Dark Mode */
             --bg-color: #121212; 
-            --text-heading: #d4af37; /* Gold color for headings */
-            --text-normal: #ffffff; /* White normal text */
-            --card-bg: #1e1e1e; /* Dark grey for cards and circles */
+            --text-heading: #d4af37; 
+            --text-normal: #ffffff; 
+            --card-bg: #1e1e1e; 
             --shadow: 0 4px 15px rgba(255, 255, 255, 0.05);
         }
 
@@ -67,43 +67,123 @@
         }
 
         /* ================= HEADER SECTION ================= */
-        header {
+        .main-header {
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            padding: 15px 5%;
+            justify-content: space-between;
+            gap: 20px;
+            padding: 14px 5%;
+            position: relative;
+            z-index: 1000;
             background: var(--bg-color);
             box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            position: sticky;
-            top: 0;
-            z-index: 100;
             transition: background-color 0.5s ease;
         }
 
-        .header-left img {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%; /* 1:1 Aspect ratio */
+        .brand-area {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            min-width: 0;
+        }
+
+        .brand-dp {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
             object-fit: cover;
+            flex-shrink: 0;
             border: 2px solid var(--text-heading);
         }
 
-        .header-center h1 {
-            font-size: 24px;
-            font-weight: 700;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            font-family: 'Georgia', serif;
+        .brand-name {
+            font-size: 20px;
+            font-weight: 800;
+            white-space: nowrap;
             color: var(--text-heading);
         }
 
-        /* Hamburger Menu */
-        .menu-btn {
-            font-size: 24px;
+        .desktop-nav {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .desktop-nav a {
+            text-decoration: none;
+            color: var(--text-heading);
+            font-weight: 600;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .header-icon-btn {
+            position: relative;
+            border: none;
+            background: transparent;
+            color: var(--text-heading);
+            cursor: pointer;
+            font-size: 23px;
+            padding: 8px;
+            border-radius: 10px;
+        }
+
+        .header-icon-btn:hover {
+            background: rgba(128, 128, 128, 0.12);
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -3px;
+            right: -3px;
+            min-width: 19px;
+            height: 19px;
+            padding: 2px 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #e63946;
+            color: white;
+            border-radius: 5px;
+            font-size: 11px;
+            font-weight: 800;
+            line-height: 1;
+        }
+
+        /* Search box */
+        .search-panel {
+            display: none;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 5%;
+        }
+
+        .search-panel.active {
+            display: flex;
+        }
+
+        .search-panel input {
+            flex: 1;
+            min-width: 0;
+            padding: 12px 15px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            font-size: 15px;
+        }
+
+        .search-panel button {
+            border: none;
+            background: transparent;
+            font-size: 20px;
             cursor: pointer;
             color: var(--text-heading);
         }
 
+        /* Sidebar Menu */
         .side-menu {
             position: fixed;
             top: 0;
@@ -145,7 +225,64 @@
             color: var(--text-heading);
         }
 
-        /* ================= MARQUEE (DELIVERY OFFER) ================= */
+        /* ================= LOGIN MODAL STYLES (NEW) ================= */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+        }
+        .modal-content {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 350px;
+            text-align: center;
+            position: relative;
+            box-shadow: var(--shadow);
+        }
+        .modal-content h3 {
+            color: var(--text-heading);
+            margin-bottom: 20px;
+            font-size: 22px;
+        }
+        .modal-content input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            background: var(--bg-color);
+            color: var(--text-heading);
+            font-size: 15px;
+        }
+        .auth-submit-btn {
+            background: var(--text-heading);
+            color: var(--bg-color);
+            border: none;
+            padding: 12px;
+            width: 100%;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .toggle-text {
+            margin-top: 15px;
+            font-size: 14px;
+            color: var(--text-normal);
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        /* ================= MARQUEE ================= */
         .announcement {
             background: var(--text-heading);
             color: var(--bg-color);
@@ -170,6 +307,12 @@
             align-items: center;
             cursor: pointer;
             transition: transform 0.3s;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .cat-item:hover {
+            transform: translateY(-5px);
         }
 
         .cat-circle {
@@ -187,11 +330,17 @@
             transition: 0.3s;
         }
 
+        .cat-item:hover .cat-circle {
+            border-color: var(--text-heading);
+            color: var(--text-heading);
+        }
+
         .cat-item span {
             margin-top: 10px;
             font-weight: 600;
             font-size: 14px;
             color: var(--text-heading);
+            text-decoration: none;
         }
 
         /* ================= PRODUCT GRID ================= */
@@ -210,7 +359,7 @@
 
         .product-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 20px;
         }
 
@@ -221,6 +370,10 @@
             text-align: center;
             box-shadow: var(--shadow);
             transition: transform 0.3s, background-color 0.5s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
         }
 
         .product-card img {
@@ -242,15 +395,23 @@
             color: var(--text-normal);
             font-weight: bold;
             font-size: 18px;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
+        }
+
+        .product-actions {
+            display: flex;
+            gap: 8px;
+            width: 100%;
+            margin-top: 8px;
         }
 
         .order-btn {
             background: var(--btn-bg);
             color: white;
             border: none;
-            padding: 10px 15px;
-            width: 100%;
+            padding: 10px 8px;
+            flex: 1;
+            min-width: 0;
             border-radius: 8px;
             font-size: 14px;
             font-weight: bold;
@@ -258,8 +419,31 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
             transition: 0.3s;
+        }
+
+        .add-cart-btn {
+            background: var(--text-heading);
+            color: var(--bg-color);
+            border: none;
+            padding: 10px 8px;
+            flex: 1;
+            min-width: 0;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 6px;
+            transition: 0.3s ease;
+        }
+
+        .order-btn:hover, .add-cart-btn:hover {
+            opacity: 0.88;
+            transform: translateY(-2px);
         }
 
         /* ================= FOOTER ================= */
@@ -281,211 +465,22 @@
             transition: 0.3s;
         }
 
-        /* Responsive */
-        @media (max-width: 600px) {
-            .header-center h1 { font-size: 20px; }
-            .product-grid { grid-template-columns: repeat(2, 1fr); gap: 15px; }
+        @media (max-width: 768px) {
+            .main-header { gap: 8px; padding: 12px 4%; }
+            .brand-name { font-size: 15px; }
+            .brand-dp { width: 34px; height: 34px; }
+            .desktop-nav { display: none; }
+            .header-actions { gap: 3px; }
+            .header-icon-btn { font-size: 20px; padding: 6px; }
+            .cart-count { min-width: 17px; height: 17px; font-size: 10px; }
+            .product-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
             .product-card img { height: 140px; }
-            .order-btn { font-size: 13px; padding: 8px; }
-        } 
-        /* Category links ka blue color aur underline remove */
-        .cat-item {
-             text-decoration: none;
-             color: inherit;
+            .order-btn, .add-cart-btn { font-size: 11px; padding: 8px 4px; gap: 4px; }
+            .product-actions { gap: 6px; }
         }
-
-        .cat-item:visited,
-        .cat-item:hover,
-        .cat-item:active {
-             text-decoration: none;
-             color: inherit;
-        }
-
-        .cat-item span {
-             text-decoration: none;
-            }
-
-            /* =========================
-   ZAVI COLLECTION HEADER
-   ========================= */
-
-.main-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 20px;
-    padding: 14px 5%;
-    position: relative;
-    z-index: 1000;
-}
-
-.brand-area {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    min-width: 0;
-}
-
-.brand-dp {
-    width: 42px;
-    height: 42px;
-    border-radius: 50%;
-    object-fit: cover;
-    flex-shrink: 0;
-}
-
-.brand-name {
-    font-size: 20px;
-    font-weight: 800;
-    white-space: nowrap;
-}
-
-.desktop-nav {
-    display: flex;
-    align-items: center;
-    gap: 24px;
-}
-
-.desktop-nav a {
-    text-decoration: none;
-    color: inherit;
-    font-weight: 600;
-}
-
-.header-actions {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.header-icon-btn {
-    position: relative;
-    border: none;
-    background: transparent;
-    color: inherit;
-    cursor: pointer;
-    font-size: 23px;
-    padding: 8px;
-    border-radius: 10px;
-}
-
-.header-icon-btn:hover {
-    background: rgba(128, 128, 128, 0.12);
-}
-
-.cart-count {
-    position: absolute;
-    top: -3px;
-    right: -3px;
-
-    min-width: 19px;
-    height: 19px;
-    padding: 2px 5px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    background: #e63946;
-    color: white;
-    border-radius: 5px;
-
-    font-size: 11px;
-    font-weight: 800;
-    line-height: 1;
-}
-
-/* Search box initially hidden */
-.search-panel {
-    display: none;
-    align-items: center;
-    gap: 10px;
-    padding: 12px 5%;
-}
-
-.search-panel.active {
-    display: flex;
-}
-
-.search-panel input {
-    flex: 1;
-    min-width: 0;
-    padding: 12px 15px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    font-size: 15px;
-}
-
-.search-panel button {
-    border: none;
-    background: transparent;
-    font-size: 20px;
-    cursor: pointer;
-}
-
-/* Mobile responsive design */
-@media (max-width: 768px) {
-
-    .main-header {
-        gap: 8px;
-        padding: 12px 4%;
-    }
-    .brand-name {
-        font-size: 15px;
-    }
-    .brand-dp {
-        width: 34px;
-        height: 34px;
-    }
-    .desktop-nav {
-        display: none;
-    }
-    .header-actions {
-        gap: 3px;
-    }
-    .header-icon-btn {
-        font-size: 20px;
-        padding: 6px;
-    }
-    .cart-count {
-        min-width: 17px;
-        height: 17px;
-        font-size: 10px;
-    }
-}
-/* ================= ADD TO CART BUTTON ================= */
-
-.add-cart-btn {
-    background: var(--text-heading);
-    color: var(--bg-color);
-    border: none;
-    padding: 10px 15px;
-    width: 100%;
-    border-radius: 8px;
-    font-size: 14px;
-    font-weight: bold;
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 8px;
-    margin-top: 8px;
-    transition: 0.3s ease;
-}
-
-.add-cart-btn:hover {
-    opacity: 0.85;
-    transform: translateY(-2px);
-}
-
-.add-cart-btn:active {
-    transform: scale(0.97);
-}
-
     </style>
 </head>
 <body>
-
 
     <!-- Floating Dark Mode Toggle Button -->
     <button id="darkModeBtn" onclick="toggleDarkMode()">
@@ -494,52 +489,29 @@
 
     <!-- Header -->
     <header class="main-header">
+        <div class="brand-area">
+            <img src="dp01.png" alt="Zavi Collection Logo" class="brand-dp">
+            <span class="brand-name">ZAVI COLLECTION</span>
+        </div>
+        <nav class="desktop-nav">
+            <a href="index.html">Home</a>
+            <a href="#categories">Categories</a>
+        </nav>
+        <div class="header-actions">
+            <button class="header-icon-btn" id="searchToggle" aria-label="Search">🔍</button>
+            <button class="header-icon-btn cart-button" id="cartButton" aria-label="Cart">
+                🛒<span id="cartCount" class="cart-count">0</span>
+            </button>
+            <button class="header-icon-btn" id="menuToggle" onclick="toggleMenu()" aria-label="Open menu">☰</button>
+        </div>
+    </header> 
 
-    <div class="brand-area">
-        <img src="dp01.png" alt="Zavi Collection Logo" class="brand-dp">
-
-        <span class="brand-name">ZAVI COLLECTION</span>
+    <div class="search-panel" id="searchPanel">
+        <input type="search" id="searchInput" placeholder="Search products..." aria-label="Search products">
+        <button id="searchClose" type="button">✕</button>
     </div>
 
-    <nav class="desktop-nav">
-        <a href="index.html">Home</a>
-        <a href="#categories">Categories</a>
-    </nav>
-
-    <div class="header-actions">
-
-        <button class="header-icon-btn" id="searchToggle" aria-label="Search">
-            🔍
-        </button>
-
-        <button class="header-icon-btn cart-button" id="cartButton" aria-label="Cart">
-            🛒
-            <span id="cartCount" class="cart-count">0</span>
-        </button>
-
-        <button class="header-icon-btn" id="menuToggle" aria-label="Open menu">
-            ☰
-        </button>
-
-    </div>
-
-</header> 
-<div class="search-panel" id="searchPanel">
-
-    <input
-        type="search"
-        id="searchInput"
-        placeholder="Search products..."
-        aria-label="Search products"
-    >
-
-    <button id="searchClose" type="button">
-        ✕
-    </button>
-
-</div>
-
-    <!-- Sidebar Menu -->
+    <!-- Sidebar Menu (UPDATED WITH LOGIN) -->
     <div class="side-menu" id="sideMenu">
         <i class="fas fa-times close-btn" onclick="toggleMenu()"></i>
         <ul>
@@ -547,44 +519,49 @@
             <li>Girls</li>
             <li>Jewellery</li>
             <li>Contact Us</li>
+            <!-- New Login / Logout Buttons in Menu -->
+            <li id="menuLoginBtn" onclick="openLoginModal()"><i class="fas fa-user"></i> Login / Sign Up</li>
+            <li id="menuLogoutBtn" style="display: none;" onclick="window.confirmLogout()"><i class="fas fa-sign-out-alt"></i> Logout</li>
         </ul>
+    </div>
+
+    <!-- Same Page Login Modal (NEW) -->
+    <div id="loginModal" class="modal-overlay">
+        <div class="modal-content">
+            <i class="fas fa-times close-btn" style="position: absolute; top: 15px; right: 15px; font-size: 20px; cursor: pointer; color: var(--text-heading);" onclick="closeLoginModal()"></i>
+            <h3 id="modalTitle">Login to Zavi</h3>
+            <input type="email" id="emailInput" placeholder="Email Address">
+            <input type="password" id="passwordInput" placeholder="Password">
+            <button class="auth-submit-btn" id="authSubmitBtn" onclick="window.handleAuth()">Login</button>
+            <p class="toggle-text" id="toggleAuthText" onclick="window.toggleAuthMode()">Don't have an account? Sign Up</p>
+        </div>
     </div>
 
     <!-- Announcement Marquee -->
     <div class="announcement">
         <marquee behavior="scroll" direction="left">
-            ✨ If your order under Rs.499 get free dilevery ✨ 
+            ✨ If your order under Rs.499 get free delivery ✨ 
         </marquee>
     </div>
 
-
-    <!-- Categories (Circles) -->
-    <section class="categories">
-       <a href="women.html" class="cat-item">
-     <div class="cat-circle">
-        <i class="fas fa-tshirt"></i>
-    </div>
-    <span>Women</span>
-</a> 
-<a href="jewellery.html" class="cat-item">
-    <div class="cat-circle">
-        <i class="fas fa-tshirt"></i>
-    </div>
-    <span>Jewellery</span>
-</a>
+    <!-- Categories -->
+    <section class="categories" id="categories">
+        <a href="women.html" class="cat-item">
+            <div class="cat-circle"><i class="fas fa-tshirt"></i></div>
+            <span>Women</span>
+        </a> 
+        <a href="jewellery.html" class="cat-item">
+            <div class="cat-circle"><i class="fas fa-gem"></i></div>
+            <span>Jewellery</span>
+        </a>
         <a href="gifts.html" class="cat-item">
-    <div class="cat-circle">
-        <i class="fas fa-tshirt"></i>
-    </div>
-    <span>Gifts</span>
-</a>
+            <div class="cat-circle"><i class="fas fa-gift"></i></div>
+            <span>Gifts</span>
+        </a>
         <a href="all.html" class="cat-item">
-    <div class="cat-circle">
-        <i class="fas fa-tshirt"></i>
-    </div>
-    <span>All</span>
-</a>
-        
+            <div class="cat-circle"><i class="fas fa-th-large"></i></div>
+            <span>All</span>
+        </a>
     </section>
 
     <!-- Product Grid -->
@@ -592,151 +569,126 @@
         <h2 class="section-title">Our Trending Collection</h2>
         <div class="product-grid">
 
-
-
-
-            
-           <!-- Product 1 -->
+            <!-- Product 1 -->
             <div class="product-card">
                 <img src="clothes/photo01.png" alt="Designer Peach Suit">
-                <div class="product-title">Printed kurti (RB)</div>
-                <div class="product-price">₹450</div>
-                <button class="order-btn" onclick="orderOnWhatsApp('Printed kurti (RB)', '899')">
-                    <i class="fab fa-whatsapp"></i> Order Now
-                </button>
-                <button class="add-cart-btn" onclick="addToCart('Printed Kurti (RB)', '899', 'clothes/photo01.png')">
-                    <i class="fas fa-cart-plus"></i> Add to Cart
-                </button>
+                <div class="product-title">Designer Peach Suit</div>
+                <div class="product-price">₹1,200</div>
+                <div class="product-actions">
+                    <button class="order-btn" onclick="orderOnWhatsApp('Designer Peach Suit', '1200')">
+                        <i class="fab fa-whatsapp"></i> <span>Order Now</span>
+                    </button>
+                    <!-- Calling window.addToCart for Firebase -->
+                    <button class="add-cart-btn" onclick="window.addToCart('Designer Peach Suit', '1200', 'clothes/photo01.png')">
+                        <i class="fas fa-cart-plus"></i> <span>Add to Cart</span>
+                    </button>
+                </div>
             </div>
 
-
-
-
-
-
-            
             <!-- Product 2 -->
             <div class="product-card">
-                <img src="clothes/photo02.png" alt="Designer Peach Suit">
+                <img src="clothes/photo02.png" alt="Rose Gold Necklace">
                 <div class="product-title">Rose Gold Necklace</div>
                 <div class="product-price">₹450</div>
-                <button class="order-btn" onclick="orderOnWhatsApp('Rose Gold Necklace', '450')">
-                    <i class="fab fa-whatsapp"></i> Order Now
-                </button>
-                <button class="add-cart-btn" onclick="addToCart('Rose Gold Necklace', '450', 'clothes/photo02.png')">
-                    <i class="fas fa-cart-plus"></i> Add to Cart
-                </button>
+                <div class="product-actions">
+                    <button class="order-btn" onclick="orderOnWhatsApp('Rose Gold Necklace', '450')">
+                        <i class="fab fa-whatsapp"></i> <span>Order Now</span>
+                    </button>
+                    <button class="add-cart-btn" onclick="window.addToCart('Rose Gold Necklace', '450', 'clothes/photo02.png')">
+                        <i class="fas fa-cart-plus"></i> <span>Add to Cart</span>
+                    </button>
+                </div>
             </div>
 
-
-
-
-
-            
             <!-- Product 3 -->
             <div class="product-card">
-                <img src="clothes/photo03.png" alt="Designer Peach Suit">
+                <img src="clothes/photo03.png" alt="Girls Casual Top">
                 <div class="product-title">Girls Casual Top</div>
                 <div class="product-price">₹350</div>
-                <button class="order-btn" onclick="orderOnWhatsApp('Girls Casual Top', '350')">
-                    <i class="fab fa-whatsapp"></i> Order Now
-                </button>
-                <button class="add-cart-btn" onclick="addToCart('Girls Casual Top', '350', 'clothes/photo03.png')">
-                    <i class="fas fa-cart-plus"></i> Add to Cart
-                </button>
+                <div class="product-actions">
+                    <button class="order-btn" onclick="orderOnWhatsApp('Girls Casual Top', '350')">
+                        <i class="fab fa-whatsapp"></i> <span>Order Now</span>
+                    </button>
+                    <button class="add-cart-btn" onclick="window.addToCart('Girls Casual Top', '350', 'clothes/photo03.png')">
+                        <i class="fas fa-cart-plus"></i> <span>Add to Cart</span>
+                    </button>
+                </div>
             </div>
 
-
-
-
-
-            
             <!-- Product 4 -->
             <div class="product-card">
-                <img src="clothes/photo04.png" alt="Designer Peach Suit">
+                <img src="clothes/photo04.png" alt="Premium Gift Hamper">
                 <div class="product-title">Premium Gift Hamper</div>
                 <div class="product-price">₹900</div>
-                <button class="order-btn" onclick="orderOnWhatsApp('Premium Gift Hamper', '900')">
-                    <i class="fab fa-whatsapp"></i> Order Now
-                </button>
-                <button class="add-cart-btn" onclick="addToCart('Premium Gift Hamper', '900', 'clothes/photo04.png')">
-                    <i class="fas fa-cart-plus"></i> Add to Cart
-                </button>
+                <div class="product-actions">
+                    <button class="order-btn" onclick="orderOnWhatsApp('Premium Gift Hamper', '900')">
+                        <i class="fab fa-whatsapp"></i> <span>Order Now</span>
+                    </button>
+                    <button class="add-cart-btn" onclick="window.addToCart('Premium Gift Hamper', '900', 'clothes/photo04.png')">
+                        <i class="fas fa-cart-plus"></i> <span>Add to Cart</span>
+                    </button>
+                </div>
             </div>
-
-
-
-
 
              <!-- Product 5 -->
             <div class="product-card">
-                <img src="clothes/photo05.png" alt="Designer Peach Suit">
-                <div class="product-title">Premium Gift Hamper</div>
-                <div class="product-price">₹900</div>
-                <button class="order-btn" onclick="orderOnWhatsApp('Premium Gift Hamper', '900')">
-                    <i class="fab fa-whatsapp"></i> Order Now
-                </button>
-                <button class="add-cart-btn" onclick="addToCart('Premium Gift Hamper', '900', 'clothes/photo05.png')">
-                    <i class="fas fa-cart-plus"></i> Add to Cart
-                </button>
+                <img src="clothes/photo05.png" alt="Stylish Kurti Set">
+                <div class="product-title">Stylish Kurti Set</div>
+                <div class="product-price">₹850</div>
+                <div class="product-actions">
+                    <button class="order-btn" onclick="orderOnWhatsApp('Stylish Kurti Set', '850')">
+                        <i class="fab fa-whatsapp"></i> <span>Order Now</span>
+                    </button>
+                    <button class="add-cart-btn" onclick="window.addToCart('Stylish Kurti Set', '850', 'clothes/photo05.png')">
+                        <i class="fas fa-cart-plus"></i> <span>Add to Cart</span>
+                    </button>
+                </div>
             </div>
-
-
-
-
             
              <!-- Product 6 -->
             <div class="product-card">
-                <img src="clothes/photo06.png" alt="Designer Peach Suit">
-                <div class="product-title">Premium Gift Hamper</div>
-                <div class="product-price">₹900</div>
-                <button class="order-btn" onclick="orderOnWhatsApp('Premium Gift Hamper', '900')">
-                    <i class="fab fa-whatsapp"></i> Order Now
-                </button>
-                <button class="add-cart-btn" onclick="addToCart('Premium Gift Hamper', '900', 'clothes/photo06.png')">
-                    <i class="fas fa-cart-plus"></i> Add to Cart
-                </button>
+                <img src="clothes/photo06.png" alt="Silver Plated Ring">
+                <div class="product-title">Silver Plated Ring</div>
+                <div class="product-price">₹250</div>
+                <div class="product-actions">
+                    <button class="order-btn" onclick="orderOnWhatsApp('Silver Plated Ring', '250')">
+                        <i class="fab fa-whatsapp"></i> <span>Order Now</span>
+                    </button>
+                    <button class="add-cart-btn" onclick="window.addToCart('Silver Plated Ring', '250', 'clothes/photo06.png')">
+                        <i class="fas fa-cart-plus"></i> <span>Add to Cart</span>
+                    </button>
+                </div>
             </div>
-
-
-
-
-
 
              <!-- Product 7 -->
             <div class="product-card">
-                <img src="clothes/photo07.png" alt="Designer Peach Suit">
-                <div class="product-title">Premium Gift Hamper</div>
-                <div class="product-price">₹900</div>
-                <button class="order-btn" onclick="orderOnWhatsApp('Premium Gift Hamper', '900')">
-                    <i class="fab fa-whatsapp"></i> Order Now
-                </button>
-                <button class="add-cart-btn" onclick="addToCart('Premium Gift Hamper', '900', 'clothes/photo07.png')">
-                    <i class="fas fa-cart-plus"></i> Add to Cart
-                </button>
+                <img src="clothes/photo07.png" alt="Women Denim Jacket">
+                <div class="product-title">Women Denim Jacket</div>
+                <div class="product-price">₹1,100</div>
+                <div class="product-actions">
+                    <button class="order-btn" onclick="orderOnWhatsApp('Women Denim Jacket', '1100')">
+                        <i class="fab fa-whatsapp"></i> <span>Order Now</span>
+                    </button>
+                    <button class="add-cart-btn" onclick="window.addToCart('Women Denim Jacket', '1100', 'clothes/photo07.png')">
+                        <i class="fas fa-cart-plus"></i> <span>Add to Cart</span>
+                    </button>
+                </div>
             </div>
-
-
-
-
-
 
              <!-- Product 8 -->
             <div class="product-card">
-                <img src="clothes/photo08.png" alt="Designer Peach Suit">
-                <div class="product-title">Premium Gift Hamper</div>
-                <div class="product-price">₹900</div>
-                <button class="order-btn" onclick="orderOnWhatsApp('Premium Gift Hamper', '900')">
-                    <i class="fab fa-whatsapp"></i> Order Now
-                </button>
-                <button class="add-cart-btn" onclick="addToCart('Premium Gift Hamper', '900', 'clothes/photo08.png')">
-                    <i class="fas fa-cart-plus"></i> Add to Cart
-                </button>
+                <img src="clothes/photo08.png" alt="Party Wear Gown">
+                <div class="product-title">Party Wear Gown</div>
+                <div class="product-price">₹1,500</div>
+                <div class="product-actions">
+                    <button class="order-btn" onclick="orderOnWhatsApp('Party Wear Gown', '1500')">
+                        <i class="fab fa-whatsapp"></i> <span>Order Now</span>
+                    </button>
+                    <button class="add-cart-btn" onclick="window.addToCart('Party Wear Gown', '1500', 'clothes/photo08.png')">
+                        <i class="fas fa-cart-plus"></i> <span>Add to Cart</span>
+                    </button>
+                </div>
             </div>
-
-
-
-
             
         </div>
     </section>
@@ -752,109 +704,173 @@
         <p style="margin-top: 20px; font-size: 12px;">©️ 2026 Zavi Collection. All Rights Reserved.</p>
     </footer>
 
-    <!-- JavaScript For Interactions -->
+    <!-- Basic UI Scripts -->
     <script>
-
-        // DARK MODE TOGGLE LOGIC
+        // DARK MODE TOGGLE
         function toggleDarkMode() {
             document.body.classList.toggle('dark-theme');
             const icon = document.querySelector('#darkModeBtn i');
-            
-            // Icon Change Karna (Moon / Sun)
             if (document.body.classList.contains('dark-theme')) {
                 icon.classList.remove('fa-moon');
-                icon.classList.add('fa-sun'); // Dark mode me sun dikhega
+                icon.classList.add('fa-sun'); 
             } else {
                 icon.classList.remove('fa-sun');
-                icon.classList.add('fa-moon'); // Light mode me moon dikhega
+                icon.classList.add('fa-moon'); 
             }
         }
 
-        // Sidebar Menu Toggle
+        // SIDEBAR MENU
         function toggleMenu() {
-            const menu = document.getElementById('sideMenu');
-            menu.classList.toggle('active');
+            document.getElementById('sideMenu').classList.toggle('active');
         }
 
-// ================= ADD TO CART SYSTEM =================
+        // LOGIN MODAL TOGGLES
+        function openLoginModal() {
+            document.getElementById('loginModal').style.display = 'flex';
+            toggleMenu(); // Menu band kar dega login khulte hi
+        }
+        function closeLoginModal() {
+            document.getElementById('loginModal').style.display = 'none';
+        }
 
-let cart = JSON.parse(localStorage.getItem("zaviCart")) || [];
-
-function addToCart(productName, price, image) {
-
-    const existingProduct = cart.find(
-        item => item.name === productName
-    );
-
-    if (existingProduct) {
-        existingProduct.quantity += 1;
-    } else {
-        cart.push({
-            name: productName,
-            price: Number(price),
-            image: image,
-            quantity: 1
-        });
-    }
-
-    localStorage.setItem("zaviCart", JSON.stringify(cart));
-
-    updateCartCount();
-
-    alert(productName + " cart mein add ho gaya 🛒");
-}
-
-
-// Cart count update karna
-function updateCartCount() {
-
-    const cartCount = document.getElementById("cartCount");
-
-    if (cartCount) {
-        const totalItems = cart.reduce(
-            (total, item) => total + item.quantity,
-            0
-        );
-
-        cartCount.textContent = totalItems;
-    }
-}
-
-
-// Page load hone par cart count dikhana
-updateCartCount();
-
-        // Dynamic WhatsApp Order Generator
+        // WHATSAPP ORDER LOGIC
         function orderOnWhatsApp(productName, price) {
             const phoneNumber = "919762725059"; 
             const message = `Hello Zavi Collection! 💖\n\nMuje ye product order karna hai:\n*Product:* ${productName}\n*Price:* ₹${price}\n\nPlease order process karein.`;
-            
             const encodedMessage = encodeURIComponent(message);
-            const whatsappURL = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodedMessage}`;
-            
-            window.open(whatsappURL, '_blank');
+            window.location.href = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
         }
 
+        // SEARCH PANEL LOGIC
         const searchToggle = document.getElementById("searchToggle");
-const searchPanel = document.getElementById("searchPanel");
-const searchClose = document.getElementById("searchClose");
-const searchInput = document.getElementById("searchInput");
-
-if (searchToggle && searchPanel) {
-    searchToggle.addEventListener("click", () => {
-        searchPanel.classList.toggle("active");
-
-        if (searchPanel.classList.contains("active") && searchInput) {
-            searchInput.focus();
+        const searchPanel = document.getElementById("searchPanel");
+        const searchClose = document.getElementById("searchClose");
+        if (searchToggle && searchPanel) {
+            searchToggle.addEventListener("click", () => searchPanel.classList.toggle("active"));
         }
-    });
-}
-
-if (searchClose && searchPanel) {
-    searchClose.addEventListener("click", () => {
-        searchPanel.classList.remove("active");
-    });
-}
+        if (searchClose && searchPanel) {
+            searchClose.addEventListener("click", () => searchPanel.classList.remove("active"));
+        }
     </script>
+
+    <!-- ================= FIREBASE MODULE SCRIPT ================= -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import { getAuth, onAuthStateChanged, signOut, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+        import { getFirestore, collection, addDoc, query, where, onSnapshot } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyBa8Sb8mkeGrDDmE540cBkz5ntgLZ4icUU",
+            authDomain: "maarikastore-b11b9.firebaseapp.com",
+            projectId: "maarikastore-b11b9",
+            storageBucket: "maarikastore-b11b9.appspot.com",
+            messagingSenderId: "547356607178",
+            appId: "1:547356607178:web:aa7773d827dbad99726a33"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        const menuLoginBtn = document.getElementById("menuLoginBtn");
+        const menuLogoutBtn = document.getElementById("menuLogoutBtn");
+        const cartCount = document.getElementById("cartCount");
+
+        // FIREBASE AUTH LISTENER (Update Menu & Cart)
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                // Agar user login hai
+                menuLoginBtn.style.display = "none";
+                menuLogoutBtn.style.display = "block";
+
+                // Cart Count update karna
+                const q = query(collection(db, "cart"), where("User", "==", user.uid));
+                onSnapshot(q, (snapshot) => {
+                    const count = snapshot.size;
+                    if(count > 0){
+                        cartCount.style.display = "flex";
+                        cartCount.innerText = count;
+                    } else {
+                        cartCount.style.display = "none";
+                    }
+                });
+            } else {
+                // Agar user login nahi hai
+                menuLoginBtn.style.display = "block";
+                menuLogoutBtn.style.display = "none";
+                cartCount.style.display = "none";
+            }
+        });
+
+        // ================= AUTH (LOGIN / SIGNUP) LOGIC =================
+        let isLoginMode = true;
+        
+        window.toggleAuthMode = function() {
+            isLoginMode = !isLoginMode;
+            document.getElementById("modalTitle").innerText = isLoginMode ? "Login to Zavi" : "Create Account";
+            document.getElementById("authSubmitBtn").innerText = isLoginMode ? "Login" : "Sign Up";
+            document.getElementById("toggleAuthText").innerText = isLoginMode ? "Don't have an account? Sign Up" : "Already have an account? Login";
+        }
+
+        window.handleAuth = async function() {
+            const email = document.getElementById("emailInput").value;
+            const pass = document.getElementById("passwordInput").value;
+            
+            if(!email || !pass) {
+                alert("Please email aur password dono daalein!");
+                return;
+            }
+
+            try {
+                if(isLoginMode) {
+                    await signInWithEmailAndPassword(auth, email, pass);
+                    alert("Welcome back! Login Successful.");
+                } else {
+                    await createUserWithEmailAndPassword(auth, email, pass);
+                    alert("Account ban gaya! Welcome to Zavi Collection.");
+                }
+                closeLoginModal(); // Form band kardo success ke baad
+                document.getElementById("emailInput").value = ''; // Fields saaf kardo
+                document.getElementById("passwordInput").value = '';
+            } catch(error) {
+                alert("Error: " + error.message);
+            }
+        }
+
+        // ================= FIREBASE ADD TO CART LOGIC =================
+        window.addToCart = async function(name, price, image) {
+            const user = auth.currentUser;
+            
+            if(!user) {
+                alert("Cart mein add karne ke liye pehle Login karein!");
+                openLoginModal(); // Agar login nahi hai, to direct modal khol do
+                return;
+            }
+
+            try {
+                await addDoc(collection(db, "cart"), {
+                    Name: name,
+                    Price: Number(price),
+                    Image: image,
+                    User: user.uid
+                });
+                alert("✅ " + name + " Cart me save ho gaya 🛒");
+            } catch(e) {
+                console.error("Cart error: ", e);
+                alert("Koi problem aayi, internet connection check karein.");
+            }
+        };
+
+        // FIREBASE LOGOUT LOGIC
+        window.confirmLogout = function() {
+            if(confirm("Kya aap sach me logout karna chahte hain?")) {
+                signOut(auth).then(() => {
+                    alert("Logout successful!");
+                    toggleMenu(); // Menu close kar do
+                });
+            }
+        };
+    </script>
+
 </body>
 </html>
