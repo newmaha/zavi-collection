@@ -27,443 +27,77 @@
             --shadow: 0 4px 15px rgba(255, 255, 255, 0.05);
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-normal);
-            overflow-x: hidden;
-            transition: background-color 0.5s ease, color 0.5s ease;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: var(--bg-color); color: var(--text-normal); overflow-x: hidden; transition: background-color 0.5s ease, color 0.5s ease; }
 
         /* ================= DARK MODE TOGGLE BUTTON ================= */
-        #darkModeBtn {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 55px;
-            height: 55px;
-            border-radius: 50%;
-            background-color: var(--text-heading);
-            color: var(--bg-color);
-            border: none;
-            font-size: 24px;
-            cursor: pointer;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-            z-index: 1000;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            transition: transform 0.3s ease, background-color 0.5s ease;
-        }
-
-        #darkModeBtn:active {
-            transform: scale(0.9);
-        }
+        #darkModeBtn { position: fixed; bottom: 30px; right: 30px; width: 55px; height: 55px; border-radius: 50%; background-color: var(--text-heading); color: var(--bg-color); border: none; font-size: 24px; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.3); z-index: 1000; display: flex; justify-content: center; align-items: center; transition: transform 0.3s ease, background-color 0.5s ease; }
+        #darkModeBtn:active { transform: scale(0.9); }
 
         /* ================= HEADER SECTION ================= */
-        .main-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 20px;
-            padding: 14px 5%;
-            position: relative;
-            z-index: 1000;
-            background: var(--bg-color);
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            transition: background-color 0.5s ease;
-        }
+        .main-header { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 14px 5%; position: relative; z-index: 1000; background: var(--bg-color); box-shadow: 0 2px 10px rgba(0,0,0,0.05); transition: background-color 0.5s ease; }
+        .brand-area { display: flex; align-items: center; gap: 10px; min-width: 0; }
+        .brand-dp { width: 42px; height: 42px; border-radius: 50%; object-fit: cover; flex-shrink: 0; border: 2px solid var(--text-heading); }
+        .brand-name { font-size: 20px; font-weight: 800; white-space: nowrap; color: var(--text-heading); }
+        .desktop-nav { display: flex; align-items: center; gap: 24px; }
+        .desktop-nav a { text-decoration: none; color: var(--text-heading); font-weight: 600; }
+        
+        .header-actions { display: flex; align-items: center; gap: 12px; }
+        .header-icon-btn { position: relative; border: none; background: transparent; color: var(--text-heading); cursor: pointer; font-size: 23px; padding: 8px; border-radius: 10px; }
+        .header-icon-btn:hover { background: rgba(128, 128, 128, 0.12); }
 
-        .brand-area {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            min-width: 0;
-        }
-
-        .brand-dp {
-            width: 42px;
-            height: 42px;
-            border-radius: 50%;
-            object-fit: cover;
-            flex-shrink: 0;
-            border: 2px solid var(--text-heading);
-        }
-
-        .brand-name {
-            font-size: 20px;
-            font-weight: 800;
-            white-space: nowrap;
-            color: var(--text-heading);
-        }
-
-        .desktop-nav {
-            display: flex;
-            align-items: center;
-            gap: 24px;
-        }
-
-        .desktop-nav a {
-            text-decoration: none;
-            color: var(--text-heading);
-            font-weight: 600;
-        }
-
-        .header-actions {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .header-icon-btn {
-            position: relative;
-            border: none;
-            background: transparent;
-            color: var(--text-heading);
-            cursor: pointer;
-            font-size: 23px;
-            padding: 8px;
-            border-radius: 10px;
-        }
-
-        .header-icon-btn:hover {
-            background: rgba(128, 128, 128, 0.12);
-        }
-
-        .cart-count {
-            position: absolute;
-            top: -3px;
-            right: -3px;
-            min-width: 19px;
-            height: 19px;
-            padding: 2px 5px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #e63946;
-            color: white;
-            border-radius: 5px;
-            font-size: 11px;
-            font-weight: 800;
-            line-height: 1;
-        }
+        .cart-count { position: absolute; top: -3px; right: -3px; min-width: 19px; height: 19px; padding: 2px 5px; display: none; align-items: center; justify-content: center; background: #e63946; color: white; border-radius: 5px; font-size: 11px; font-weight: 800; line-height: 1; }
 
         /* Search box */
-        .search-panel {
-            display: none;
-            align-items: center;
-            gap: 10px;
-            padding: 12px 5%;
-        }
-
-        .search-panel.active {
-            display: flex;
-        }
-
-        .search-panel input {
-            flex: 1;
-            min-width: 0;
-            padding: 12px 15px;
-            border: 1px solid #ccc;
-            border-radius: 10px;
-            font-size: 15px;
-        }
-
-        .search-panel button {
-            border: none;
-            background: transparent;
-            font-size: 20px;
-            cursor: pointer;
-            color: var(--text-heading);
-        }
+        .search-panel { display: none; align-items: center; gap: 10px; padding: 12px 5%; }
+        .search-panel.active { display: flex; }
+        .search-panel input { flex: 1; min-width: 0; padding: 12px 15px; border: 1px solid #ccc; border-radius: 10px; font-size: 15px; }
+        .search-panel button { border: none; background: transparent; font-size: 20px; cursor: pointer; color: var(--text-heading); }
 
         /* Sidebar Menu */
-        .side-menu {
-            position: fixed;
-            top: 0;
-            right: -250px;
-            width: 250px;
-            height: 100vh;
-            background: var(--card-bg);
-            box-shadow: -5px 0 15px rgba(0,0,0,0.1);
-            transition: 0.4s ease;
-            z-index: 1000;
-            padding-top: 60px;
-        }
-
-        .side-menu.active {
-            right: 0;
-        }
-
-        .close-btn {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            font-size: 24px;
-            cursor: pointer;
-            color: var(--text-heading);
-        }
-
-        .side-menu ul {
-            list-style: none;
-            padding: 0 20px;
-        }
-
-        .side-menu ul li {
-            margin: 20px 0;
-            font-size: 18px;
-            font-weight: 600;
-            border-bottom: 1px solid var(--text-normal);
-            padding-bottom: 10px;
-            cursor: pointer;
-            color: var(--text-heading);
-        }
+        .side-menu { position: fixed; top: 0; right: -250px; width: 250px; height: 100vh; background: var(--card-bg); box-shadow: -5px 0 15px rgba(0,0,0,0.1); transition: 0.4s ease; z-index: 1000; padding-top: 60px; }
+        .side-menu.active { right: 0; }
+        .close-btn { position: absolute; top: 20px; right: 20px; font-size: 24px; cursor: pointer; color: var(--text-heading); }
+        .side-menu ul { list-style: none; padding: 0 20px; }
+        .side-menu ul li { margin: 20px 0; font-size: 18px; font-weight: 600; border-bottom: 1px solid var(--text-normal); padding-bottom: 10px; cursor: pointer; color: var(--text-heading); }
 
         /* ================= LOGIN MODAL STYLES (NEW) ================= */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.6);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 2000;
-        }
-        .modal-content {
-            background: var(--card-bg);
-            padding: 30px;
-            border-radius: 15px;
-            width: 90%;
-            max-width: 350px;
-            text-align: center;
-            position: relative;
-            box-shadow: var(--shadow);
-        }
-        .modal-content h3 {
-            color: var(--text-heading);
-            margin-bottom: 20px;
-            font-size: 22px;
-        }
-        .modal-content input {
-            width: 100%;
-            padding: 12px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            background: var(--bg-color);
-            color: var(--text-heading);
-            font-size: 15px;
-        }
-        .auth-submit-btn {
-            background: var(--text-heading);
-            color: var(--bg-color);
-            border: none;
-            padding: 12px;
-            width: 100%;
-            border-radius: 8px;
-            font-weight: bold;
-            font-size: 16px;
-            cursor: pointer;
-        }
-        .toggle-text {
-            margin-top: 15px;
-            font-size: 14px;
-            color: var(--text-normal);
-            cursor: pointer;
-            font-weight: bold;
-        }
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.6); display: none; justify-content: center; align-items: center; z-index: 2000; }
+        .modal-content { background: var(--card-bg); padding: 30px; border-radius: 15px; width: 90%; max-width: 350px; text-align: center; position: relative; box-shadow: var(--shadow); }
+        .modal-content h3 { color: var(--text-heading); margin-bottom: 20px; font-size: 22px; }
+        .modal-content input { width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 8px; background: var(--bg-color); color: var(--text-heading); font-size: 15px; }
+        .auth-submit-btn { background: var(--text-heading); color: var(--bg-color); border: none; padding: 12px; width: 100%; border-radius: 8px; font-weight: bold; font-size: 16px; cursor: pointer; }
+        .toggle-text { margin-top: 15px; font-size: 14px; color: var(--text-normal); cursor: pointer; font-weight: bold; }
 
         /* ================= MARQUEE ================= */
-        .announcement {
-            background: var(--text-heading);
-            color: var(--bg-color);
-            padding: 8px 0;
-            font-size: 14px;
-            font-weight: bold;
-            letter-spacing: 1px;
-        }
+        .announcement { background: var(--text-heading); color: var(--bg-color); padding: 8px 0; font-size: 14px; font-weight: bold; letter-spacing: 1px; }
 
         /* ================= CATEGORIES ================= */
-        .categories {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            padding: 30px 5%;
-            flex-wrap: wrap;
-        }
-
-        .cat-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            cursor: pointer;
-            transition: transform 0.3s;
-            text-decoration: none;
-            color: inherit;
-        }
-
-        .cat-item:hover {
-            transform: translateY(-5px);
-        }
-
-        .cat-circle {
-            width: 70px;
-            height: 70px;
-            border-radius: 50%;
-            background: var(--card-bg);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            box-shadow: var(--shadow);
-            font-size: 24px;
-            color: var(--text-normal);
-            border: 2px solid transparent;
-            transition: 0.3s;
-        }
-
-        .cat-item:hover .cat-circle {
-            border-color: var(--text-heading);
-            color: var(--text-heading);
-        }
-
-        .cat-item span {
-            margin-top: 10px;
-            font-weight: 600;
-            font-size: 14px;
-            color: var(--text-heading);
-            text-decoration: none;
-        }
+        .categories { display: flex; justify-content: center; gap: 20px; padding: 30px 5%; flex-wrap: wrap; }
+        .cat-item { display: flex; flex-direction: column; align-items: center; cursor: pointer; transition: transform 0.3s; text-decoration: none; color: inherit; }
+        .cat-item:hover { transform: translateY(-5px); }
+        .cat-circle { width: 70px; height: 70px; border-radius: 50%; background: var(--card-bg); display: flex; justify-content: center; align-items: center; box-shadow: var(--shadow); font-size: 24px; color: var(--text-normal); border: 2px solid transparent; transition: 0.3s; }
+        .cat-item:hover .cat-circle { border-color: var(--text-heading); color: var(--text-heading); }
+        .cat-item span { margin-top: 10px; font-weight: 600; font-size: 14px; color: var(--text-heading); text-decoration: none; }
 
         /* ================= PRODUCT GRID ================= */
-        .products-section {
-            padding: 20px 5%;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 24px;
-            margin-bottom: 25px;
-            font-family: 'Georgia', serif;
-            color: var(--text-heading);
-            font-weight: bold;
-        }
-
-        .product-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-        }
-
-        .product-card {
-            background: var(--card-bg);
-            border-radius: 15px;
-            padding: 15px;
-            text-align: center;
-            box-shadow: var(--shadow);
-            transition: transform 0.3s, background-color 0.5s ease;
-        }
-
-        .product-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .product-card img {
-            width: 100%;
-            height: 180px;
-            object-fit: cover;
-            border-radius: 10px;
-            margin-bottom: 15px;
-        }
-
-        .product-title {
-            font-size: 16px;
-            font-weight: bold;
-            margin-bottom: 5px;
-            color: var(--text-heading);
-        }
-
-        .product-price {
-            color: var(--text-normal);
-            font-weight: bold;
-            font-size: 18px;
-            margin-bottom: 10px;
-        }
-
-        .product-actions {
-            display: flex;
-            gap: 8px;
-            width: 100%;
-            margin-top: 8px;
-        }
-
-        .order-btn {
-            background: var(--btn-bg);
-            color: white;
-            border: none;
-            padding: 10px 8px;
-            flex: 1;
-            min-width: 0;
-            border-radius: 8px;
-            font-size: 14px;
-            font-weight: bold;
-            cursor: pointer;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 6px;
-            transition: 0.3s;
-        }
-
-        .add-cart-btn {
-            background: var(--text-heading);
-            color: var(--bg-color);
-            border: none;
-            padding: 10px 8px;
-            flex: 1;
-            min-width: 0;
-            border-radius: 8px;
-            font-size: 14px;
-            font-weight: bold;
-            cursor: pointer;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 6px;
-            transition: 0.3s ease;
-        }
-
-        .order-btn:hover, .add-cart-btn:hover {
-            opacity: 0.88;
-            transform: translateY(-2px);
-        }
+        .products-section { padding: 20px 5%; }
+        .section-title { text-align: center; font-size: 24px; margin-bottom: 25px; font-family: 'Georgia', serif; color: var(--text-heading); font-weight: bold; }
+        .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
+        .product-card { background: var(--card-bg); border-radius: 15px; padding: 15px; text-align: center; box-shadow: var(--shadow); transition: transform 0.3s, background-color 0.5s ease; }
+        .product-card:hover { transform: translateY(-5px); }
+        .product-card img { width: 100%; height: 180px; object-fit: cover; border-radius: 10px; margin-bottom: 15px; }
+        .product-title { font-size: 16px; font-weight: bold; margin-bottom: 5px; color: var(--text-heading); }
+        .product-price { color: var(--text-normal); font-weight: bold; font-size: 18px; margin-bottom: 10px; }
+        
+        .product-actions { display: flex; gap: 8px; width: 100%; margin-top: 8px; }
+        .order-btn { background: var(--btn-bg); color: white; border: none; padding: 10px 8px; flex: 1; min-width: 0; border-radius: 8px; font-size: 14px; font-weight: bold; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 6px; transition: 0.3s; }
+        .add-cart-btn { background: var(--text-heading); color: var(--bg-color); border: none; padding: 10px 8px; flex: 1; min-width: 0; border-radius: 8px; font-size: 14px; font-weight: bold; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 6px; transition: 0.3s ease; }
+        .order-btn:hover, .add-cart-btn:hover { opacity: 0.88; transform: translateY(-2px); }
 
         /* ================= FOOTER ================= */
-        footer {
-            background: var(--card-bg);
-            color: var(--text-heading);
-            text-align: center;
-            padding: 30px 20px;
-            margin-top: 40px;
-            border-top: 1px solid var(--text-normal);
-            transition: background-color 0.5s ease;
-        }
-
-        .social-icons a {
-            color: var(--text-heading);
-            font-size: 24px;
-            margin: 0 10px;
-            text-decoration: none;
-            transition: 0.3s;
-        }
+        footer { background: var(--card-bg); color: var(--text-heading); text-align: center; padding: 30px 20px; margin-top: 40px; border-top: 1px solid var(--text-normal); transition: background-color 0.5s ease; }
+        .social-icons a { color: var(--text-heading); font-size: 24px; margin: 0 10px; text-decoration: none; transition: 0.3s; }
 
         @media (max-width: 768px) {
             .main-header { gap: 8px; padding: 12px 4%; }
@@ -519,13 +153,13 @@
             <li>Girls</li>
             <li>Jewellery</li>
             <li>Contact Us</li>
-            <!-- New Login / Logout Buttons in Menu -->
+            <!-- Login / Logout Buttons in Menu -->
             <li id="menuLoginBtn" onclick="openLoginModal()"><i class="fas fa-user"></i> Login / Sign Up</li>
             <li id="menuLogoutBtn" style="display: none;" onclick="window.confirmLogout()"><i class="fas fa-sign-out-alt"></i> Logout</li>
         </ul>
     </div>
 
-    <!-- Same Page Login Modal (NEW) -->
+    <!-- Same Page Login Modal -->
     <div id="loginModal" class="modal-overlay">
         <div class="modal-content">
             <i class="fas fa-times close-btn" style="position: absolute; top: 15px; right: 15px; font-size: 20px; cursor: pointer; color: var(--text-heading);" onclick="closeLoginModal()"></i>
@@ -569,7 +203,6 @@
         <h2 class="section-title">Our Trending Collection</h2>
         <div class="product-grid">
 
-            <!-- Product 1 -->
             <div class="product-card">
                 <img src="clothes/photo01.png" alt="Designer Peach Suit">
                 <div class="product-title">Designer Peach Suit</div>
@@ -578,14 +211,12 @@
                     <button class="order-btn" onclick="orderOnWhatsApp('Designer Peach Suit', '1200')">
                         <i class="fab fa-whatsapp"></i> <span>Order Now</span>
                     </button>
-                    <!-- Calling window.addToCart for Firebase -->
                     <button class="add-cart-btn" onclick="window.addToCart('Designer Peach Suit', '1200', 'clothes/photo01.png')">
                         <i class="fas fa-cart-plus"></i> <span>Add to Cart</span>
                     </button>
                 </div>
             </div>
 
-            <!-- Product 2 -->
             <div class="product-card">
                 <img src="clothes/photo02.png" alt="Rose Gold Necklace">
                 <div class="product-title">Rose Gold Necklace</div>
@@ -600,7 +231,6 @@
                 </div>
             </div>
 
-            <!-- Product 3 -->
             <div class="product-card">
                 <img src="clothes/photo03.png" alt="Girls Casual Top">
                 <div class="product-title">Girls Casual Top</div>
@@ -615,7 +245,6 @@
                 </div>
             </div>
 
-            <!-- Product 4 -->
             <div class="product-card">
                 <img src="clothes/photo04.png" alt="Premium Gift Hamper">
                 <div class="product-title">Premium Gift Hamper</div>
@@ -630,7 +259,6 @@
                 </div>
             </div>
 
-             <!-- Product 5 -->
             <div class="product-card">
                 <img src="clothes/photo05.png" alt="Stylish Kurti Set">
                 <div class="product-title">Stylish Kurti Set</div>
@@ -645,7 +273,6 @@
                 </div>
             </div>
             
-             <!-- Product 6 -->
             <div class="product-card">
                 <img src="clothes/photo06.png" alt="Silver Plated Ring">
                 <div class="product-title">Silver Plated Ring</div>
@@ -660,7 +287,6 @@
                 </div>
             </div>
 
-             <!-- Product 7 -->
             <div class="product-card">
                 <img src="clothes/photo07.png" alt="Women Denim Jacket">
                 <div class="product-title">Women Denim Jacket</div>
@@ -675,7 +301,6 @@
                 </div>
             </div>
 
-             <!-- Product 8 -->
             <div class="product-card">
                 <img src="clothes/photo08.png" alt="Party Wear Gown">
                 <div class="product-title">Party Wear Gown</div>
@@ -727,11 +352,16 @@
         // LOGIN MODAL TOGGLES
         function openLoginModal() {
             document.getElementById('loginModal').style.display = 'flex';
-            toggleMenu(); // Menu band kar dega login khulte hi
+            document.getElementById('sideMenu').classList.remove('active'); 
         }
         function closeLoginModal() {
             document.getElementById('loginModal').style.display = 'none';
         }
+
+        // YAHAN HAI FIX - CART BUTTON CLICK PAR CART.HTML OPEN HOGA
+        document.getElementById('cartButton').addEventListener('click', function() {
+            window.location.href = 'cart.html';
+        });
 
         // WHATSAPP ORDER LOGIC
         function orderOnWhatsApp(productName, price) {
@@ -779,11 +409,9 @@
         // FIREBASE AUTH LISTENER (Update Menu & Cart)
         onAuthStateChanged(auth, (user) => {
             if (user) {
-                // Agar user login hai
                 menuLoginBtn.style.display = "none";
                 menuLogoutBtn.style.display = "block";
 
-                // Cart Count update karna
                 const q = query(collection(db, "cart"), where("User", "==", user.uid));
                 onSnapshot(q, (snapshot) => {
                     const count = snapshot.size;
@@ -795,7 +423,6 @@
                     }
                 });
             } else {
-                // Agar user login nahi hai
                 menuLoginBtn.style.display = "block";
                 menuLogoutBtn.style.display = "none";
                 cartCount.style.display = "none";
@@ -829,8 +456,8 @@
                     await createUserWithEmailAndPassword(auth, email, pass);
                     alert("Account ban gaya! Welcome to Zavi Collection.");
                 }
-                closeLoginModal(); // Form band kardo success ke baad
-                document.getElementById("emailInput").value = ''; // Fields saaf kardo
+                closeLoginModal(); 
+                document.getElementById("emailInput").value = ''; 
                 document.getElementById("passwordInput").value = '';
             } catch(error) {
                 alert("Error: " + error.message);
@@ -843,7 +470,7 @@
             
             if(!user) {
                 alert("Cart mein add karne ke liye pehle Login karein!");
-                openLoginModal(); // Agar login nahi hai, to direct modal khol do
+                openLoginModal(); 
                 return;
             }
 
@@ -861,16 +488,14 @@
             }
         };
 
-        // FIREBASE LOGOUT LOGIC
         window.confirmLogout = function() {
             if(confirm("Kya aap sach me logout karna chahte hain?")) {
                 signOut(auth).then(() => {
                     alert("Logout successful!");
-                    toggleMenu(); // Menu close kar do
+                    toggleMenu(); 
                 });
             }
         };
     </script>
-
 </body>
 </html>
